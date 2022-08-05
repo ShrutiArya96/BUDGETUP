@@ -1,0 +1,341 @@
+body {
+    max-height: 100vh;
+    height: 100vh;
+    margin: 0px;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.main-body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#popup {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #00000091;
+    display: none;
+    z-index: 1;
+}
+
+#save-budget {
+    position: relative;
+    top: 44%;
+    color: white;
+    border: none;
+    left: 79%;
+    background: #0a8cdc;
+    padding: 6px 17px;
+    font-size: 10px;
+    border-radius: 10px;
+}
+
+#hide-budget-popup {
+    position: relative;
+    left: 90%;
+    background-color: #e5e5e5;
+    border: none;
+    font-size: 10px;
+    font-weight: bold;
+}
+#popup-input {
+    text-align: center;
+    position: relative;
+    top: 22%;
+    font-size: 10px;
+}
+
+.budgetValueContainer {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 42%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#budgetValueNumber {
+    font-size: 30px;
+    color: red;
+}
+#add-money-budget {
+    background-color: #34b835;
+    color: white;
+    border: none;
+    height: 22px;
+    border-radius: 22px;
+    padding: 6px 11px;
+    font-size: 8px;
+    margin-left: 10px;
+}
+.budget-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: unset;
+}
+.visuals {
+    padding: 20px;
+    width: 30%;
+    background-color: #2c434e;
+}
+
+.action-body {
+    width: 70%;
+    padding: 15px;
+    background: #ebebeb;
+}
+
+#newbudget-container {
+    width: 300px;
+    height: 145px;
+    background-color: white;
+    position: relative;
+    left: 30%;
+    top: 30%;
+    background-color: #e5e5e5;
+    box-shadow: 0px 8px 14px -3px rgba(117,117,117,0.61);
+}
+.expense-list-main-container {
+    position: relative;
+    height: calc(100% - 168px);
+    margin-top: 17px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px
+}
+#expense-list-container {
+    width: 100%;
+    padding: 0px;
+    font-size: 12px;
+    max-height: 80%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.expense-container {
+    margin-left: 5%;
+}
+.expense-value {
+    color: #c12d2d;
+}
+.expense-list-element {
+    display: flex;
+    border-bottom: 1px solid #e8e4e4;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 25px;
+}
+
+.expense-details {
+    display: flex;
+    width: 80%;
+    align-items: center;
+}
+.expense-title {
+    margin: 0px;
+}
+.expense-type {
+    margin: 0px;
+    padding: 4px 0px;
+    font-size: 10px;
+}
+
+#addBudget {
+    margin-left: 20px;
+    padding: 4px 11px;
+    background: #36b836;
+    border: 1px solid #54b71b;
+    border-radius: 25px;
+    color: white;
+    font-size: 9px;
+    display: none;
+}
+#resetBudget {
+    padding: 5px 12px;
+    background: #c12d2d;
+    border: 1px solid #c12d2d;
+    border-radius: 25px;
+    color: white;
+    font-size: 9px;
+}
+.new-expense {
+    height: 74px;
+}
+.new-expense-inputs {
+    display: flex;
+    width: 100%;
+}
+.new-expense-label {
+    font-size: 12px;
+}
+
+#add-expense{
+    padding: 5px 20px;
+    border-radius: 22px;
+    background-color: #2c5f92;
+    color: white;
+    height: 22px;
+    border: 1px solid #2c5f92;
+    font-size: 9px;
+    margin-left: 14px;
+}
+#new-expense-type {
+    width: 35%;
+    margin-left: 8px;
+    cursor: pointer;
+}
+#new-expense-type-dropdown {
+    display: none;
+    box-shadow: 0px 8px 14px -3px rgba(117,117,117,0.61);
+    background: white;
+    width: 26%;
+    margin-left: 10px;
+    z-index: 1;
+    position: absolute;
+    margin-top: 1px;
+    padding: 0px;
+}
+#new-expense-type-dropdown > li {
+    list-style: none;
+    padding: 10px;
+    margin: 0px;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+}
+
+#new-expense-type-dropdown > li:hover {
+    background-color: #e4e4e4;
+}
+
+h2 {
+    color: white;
+}
+#expense-title {
+    margin: 8px;
+    width: 60%;
+    padding: 9px;
+}
+#expense-amount {
+    margin: 8px;
+    width: 20%;
+    padding: 9px;
+}
+input {
+    height: 8px;
+    font-size: 11px;
+    padding: 8px;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+#filterpopUpContainer {
+    display: none;
+    position: absolute;
+    background-color: #2c434ec7;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.filterPopUp {
+    width: 50%;
+    height: 45%;
+    position: relative;
+    top: 30%;
+    left: 30%;
+    background-color: #ededed;
+    font-size: 12px;
+}
+
+#apply-filter {
+    padding: 5px 15px;
+    border-radius: 22px;
+    background-color: #2c5f92;
+    color: white;
+    border: 1px solid #2c5f92;
+    font-size: 10px;
+    margin-left: 14px;
+}
+
+#cancel-filter {
+    padding: 5px 15px;
+    background: #c12d2d;
+    border: 1px solid #c12d2d;
+    border-radius: 25px;
+    color: white;
+    font-size: 10px;
+}
+
+.radio {
+    height: 12px;
+    margin-right: 10px;
+}
+
+.checkbox {
+    height: 13px;
+    width: 25px;
+}
+
+.filter-popup-actions {
+    border-top: 1px solid #dedede;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+}
+#filter-options {
+    padding: 15px;
+}
+.filter-expense-type {
+    display: none;
+    padding: 0px 10px;
+}
+
+.filter-expense-amount {
+    padding: 15px;
+    display: none;
+}
+
+.filter-expense-type-check {
+    display: flex;
+    align-items: center;
+}
+
+.filter-btns {
+    padding: 5px 16px;
+    color: white;
+    font-size: 10px;
+    border-radius: 10px;
+    background-color: #2c5f92;
+    border: 1px solid #2c5f92;
+}
+
+#clear-filter {
+    color: black;
+    background-color: transparent;
+    border: 1px solid rgb(35, 35, 35);
+}
+
+.app-heading {
+    height: 75px;
+}
+.budget-actions {
+    margin-left: 10px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+

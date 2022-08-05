@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="index.css"></link>
+</head>
+
+<body>
+<!-- - add a monthly budget
+filter - shopping, food, transport, grocery, miscelleneous, investment
+search by title
+- add expenses -
+  {
+    expenseId - 
+    title - 
+    type - 
+    amount -
+  }
+- add to savings
+
+button - add emergency funds
+ - add more to emergeny fund 
+-->
+<div id="popup">
+    <div id="newbudget-container">
+        <button id="hide-budget-popup">X</button>
+        <div id="popup-input"><label>Enter Amount: </label><input type="text" id="budgetValue" style=" width: 175px;"></div>
+        <button id="save-budget">save</button>
+    </div>
+</div>
+<div id="filterpopUpContainer">
+    <div class="filterPopUp">
+        <div id="filter-options">
+            <input type="radio" class="radio" name="filter-type" value="expense-type"><label>Filter by expense type</label>
+            <input type="radio" class="radio" name="filter-type" value="expense-amount"><label>Filter by expense amount</label>
+        </div>
+        <div class="filter-expense-type">
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="shopping"><label>shopping</label></div>
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="food"><label>food</label></div>
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="grocery"><label>grocery</label></div>
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="transport"><label>transport</label></div>
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="investment"><label>investment</label></div>
+            <div class="filter-expense-type-check"><input type="checkbox" class="checkbox" data-type="miscelleneous"><label>miscelleneous</label></div>
+        </div>
+        <div class="filter-expense-amount">
+            <input type="number" id="filter-amount" placeholder="Filter amount..."></br>
+            <label style="font-size:7px;">note: the filtered list will container data greater then the enterd amount</label>
+        </div>
+        <div class="filter-popup-actions">
+            <button id="cancel-filter">Cancel</button>
+            <button id="apply-filter">Apply</button>
+        </div>
+    </div>
+</div>
+<div class="main-body">
+    <div class="visuals">
+        <h2>Your Monthly Budget</h2>
+        <div class="flex">
+            <h3 id="showMonth" style="color:white"></h3>
+            <button id="addBudget">Set budget</button>
+        </div>
+        <div class="budget-container">
+            <div class="budgetValueContainer"><h2 id="budgetValueNumber"></h2></div>
+        </div>
+    </div>
+    <div class="action-body">
+        <div class="app-heading">
+            <div class="flex" style="justify-content: unset;"><h1 style="margin: 0px;">BUDGET</h1><h1 style="color: rgb(24, 228, 24);margin: 0px;">UP 💸</h1></div>
+            <h4 style="margin: 9px 3px;">Add new expenses 💰...</h4>
+        </div>
+        <div class="new-expense">
+            <div class="new-expense-inputs">
+                <input type="text" id="expense-title" placeholder="Title...">
+                <input type="number" id="expense-amount" placeholder="Amount">
+            </div>
+            <div class="expense-type">
+                <input type="text" readonly id="new-expense-type" placeholder="select expense type">
+                <button id="add-expense">+ Add</button>
+                <button id="add-money-budget">Add savings</button>
+                <ul id="new-expense-type-dropdown">
+                    <li data-type="shopping">shopping</li>
+                    <li data-type="food">food</li>
+                    <li data-type="grocery">grocery</li>
+                    <li data-type="transport">transport</li>
+                    <li data-type="investment">investment</li>
+                    <li data-type="miscelleneous">miscelleneous</li>
+                </ul>
+            </div>    
+        </div>
+        <div class="expense-list-main-container">
+            <div class="budget-actions">
+                <button id="resetBudget">Reset</button>
+                <div class="filter-actions">
+                    <button id="show-filterPopup" class="filter-btns">Apply filter</button>
+                    <button id="clear-filter" class="filter-btns">Clear filter</button>
+                </div>
+                
+            </div>
+            <ul id="expense-list-container">
+            
+                <!-- <li>
+                    <div>
+                        <label>Title</label>
+                        <label>Type</label>
+                    </div>
+                    <h2>Amount</h2>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <script type="module" src="index.js"></script>
+    <script type="module" src="addExpense.js"></script>
+</body>
+</html>
