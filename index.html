@@ -5,21 +5,15 @@
 </head>
 
 <body>
-<!-- - add a monthly budget
-filter - shopping, food, transport, grocery, miscelleneous, investment
-search by title
-- add expenses -
+
+<!-- - add expenses -
   {
     expenseId - 
     title - 
     type - 
     amount -
-  }
-- add to savings
+  } -->
 
-button - add emergency funds
- - add more to emergeny fund 
--->
 <div id="popup">
     <div id="newbudget-container">
         <button id="hide-budget-popup">X</button>
@@ -27,8 +21,8 @@ button - add emergency funds
         <button id="save-budget">save</button>
     </div>
 </div>
-<div id="filterpopUpContainer">
-    <div class="filterPopUp">
+<div id="filterpopUpContainer" class="hide">
+    <div id="filterPopUp" class="hide">
         <div id="filter-options">
             <input type="radio" class="radio" name="filter-type" value="expense-type"><label>Filter by expense type</label>
             <input type="radio" class="radio" name="filter-type" value="expense-amount"><label>Filter by expense amount</label>
@@ -53,14 +47,15 @@ button - add emergency funds
 </div>
 <div class="main-body">
     <div class="visuals">
-        <h2>Your Monthly Budget</h2>
+        <h2 style="margin: 7px 0px;">Your Monthly Budget</h2>
         <div class="flex">
-            <h3 id="showMonth" style="color:white"></h3>
+            <h3 id="showMonth" style="color:white; margin: 7px 0px;"></h3>
             <button id="addBudget">Set budget</button>
         </div>
         <div class="budget-container">
             <div class="budgetValueContainer"><h2 id="budgetValueNumber"></h2></div>
         </div>
+        <canvas id="myChart" width="250" height="250" style="margin-top: 10px; margin-left: -30px;"></canvas>
     </div>
     <div class="action-body">
         <div class="app-heading">
@@ -106,10 +101,15 @@ button - add emergency funds
                 </li> -->
             </ul>
         </div>
+        <div class="no-expense-list">
+            <img height="200px" src="piggybank.png">
+            <h5 style="padding: 12px;">Start adding expenses</h5>
+        </div>
     </div>
 </div>
-
-    <script type="module" src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script type="module" src="leftPanelBudget.js"></script>
     <script type="module" src="addExpense.js"></script>
+
 </body>
 </html>

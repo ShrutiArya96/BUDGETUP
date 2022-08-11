@@ -1,4 +1,6 @@
-import { MONTHS, dataService } from './dataService.js';
+import { MONTHS, dataService, expenseType } from './dataService.js';
+import { createDataChart, updateBudgetDisplay, createNewExpenseEl, el, getTodayDate, getExpId } from './utils.js';
+
 (function() {
     var btn = el('#addBudget');
     btn.addEventListener('click', showAddBudgetPopup);
@@ -8,20 +10,8 @@ import { MONTHS, dataService } from './dataService.js';
     var curDate = new Date()
     heading.innerHTML = MONTHS[curDate.getMonth()]+' '+ curDate.getFullYear();
     updateBudgetDisplay();
+    createDataChart();
 })()
-
-function el(str) {
-    return document.querySelector(str);
-}
-
-function actionButton() {
-    var budget = dataService.BUDGET();
-    if(budget.isBusgetSet) {
-        el('#addBudget').style.display = 'none';
-    } else {
-        el('#addBudget').style.display = 'block';
-    }
-}
 
 function showAddBudgetPopup() {
     var popup = el('#popup');
@@ -38,20 +28,22 @@ function hideBudgetPopup() {
 }
 
 function saveBudget() {
-    var inp = el('#budgetValue');
+    var val = parseInt(el('#budgetValue').value);
     var budgetAmt = dataService.BUDGET();
-    budgetAmt.amount += parseInt(inp.value);
+    budgetAmt.amount += val;
     budgetAmt.isBusgetSet = true;
     dataService.updateBudget(budgetAmt);
     updateBudgetDisplay();
-    hideBudgetPopup()
+    hideBudgetPopup();
+    let newExp = {
+        expenseId:getExpId(),
+        date: getTodayDate(), 
+        title: 'SAVINGS',
+        type: 'savings',
+        amount: val
+    };
+    createNewExpenseEl(newExp);
+    dataService.addExpense(newExp);
+    createDataChart();
 }
 
-export function updateBudgetDisplay() {
-    var heading = el('#budgetValueNumber');
-    var val = dataService.BUDGET();
-    val = val.amount;
-    heading.style.color = val > 0 ? '#78c61d': '#e10808';
-    heading.innerHTML = val;
-    actionButton();
-}

@@ -4,7 +4,8 @@ export let expenseType = {
     transport: 'TRANSPORT 🚙',
     grocery: 'GROCERY 🍞',
     miscelleneous: 'MISCELLENEOUS 🎭',
-    investment: 'INVESTMENT 🏡'
+    investment: 'INVESTMENT 🏡',
+    savings : 'SAVINGS 💰'
 }
 export let MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export let dataService = (function() {
@@ -13,34 +14,40 @@ export let dataService = (function() {
         amount: 0
     };
     let expenseList = [];
-    let filteredExpenselist = [];
-    function isValidExpense(exp) {
-        return true;
-    }
+
     return {
         BUDGET() {
-            return BUDGET;
+            let Budget = JSON.parse(localStorage.getItem('BUDGET'));
+            if(!Budget) {
+                Budget = BUDGET;
+                localStorage.setItem('BUDGET', JSON.stringify(Budget));
+            }
+            return Budget;
         },
         expenseList() {
-            return [...expenseList];
-        },
-        filteredExpenselist() {
-            return filteredExpenselist;
+            expenseList = JSON.parse(localStorage.getItem('expenseList'));
+            if(!expenseList) {
+                expenseList = [];
+                localStorage.setItem('expenseList', JSON.stringify([]));
+            }
+            return expenseList;
         },
         addExpense(newExpense) {
-            if(isValidExpense(newExpense)) {
-                expenseList.push(newExpense);
-            }
+            let expList = this.expenseList()
+            expList.push(newExpense);
+            localStorage.setItem('expenseList', JSON.stringify(expList));
         },
         updateBudget(val) {
             BUDGET = JSON.parse(JSON.stringify(val));
+            localStorage.setItem('BUDGET', JSON.stringify(BUDGET));
         },
         resetBudget() {
             BUDGET = {
                 isBusgetSet: false,
                 amount: 0
             };
-            expenseList = [];
+            localStorage.setItem('BUDGET', JSON.stringify(BUDGET));
+            localStorage.setItem('expenseList', JSON.stringify([]));
         }
     }
 })()

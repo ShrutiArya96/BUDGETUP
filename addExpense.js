@@ -1,5 +1,5 @@
-import { dataService, expenseType } from './dataService.js';
-import * as leftPanelBudget from './leftPanelBudget.js'
+import { dataService } from './dataService.js';
+import { createDataChart, updateBudgetDisplay, createNewExpenseEl, el, getTodayDate, getExpId } from './utils.js';
 
 (function() {
     var btn2 = el('#add-expense');
@@ -11,7 +11,31 @@ import * as leftPanelBudget from './leftPanelBudget.js'
     let reset = el('#resetBudget');
     reset.addEventListener('click', resetBudget);
     addFilterEventListeners();
+    showExistingExpenseList();
 })()
+
+function toggleEmptyState(expList) {
+    if(!expList) expList = dataService.expenseList();
+    var emptyState = el('.no-expense-list');
+    var expListContainer = el('.expense-list-main-container');
+    if(expList.length > 0) {
+        emptyState.style.display = 'none';
+        expListContainer.style.display = 'block';
+    } else {
+        emptyState.style.display = 'flex';
+        expListContainer.style.display = 'none';
+    }
+}
+
+function showExistingExpenseList() {
+    var expenseList = dataService.expenseList();
+    if(expenseList.length > 0) {
+        var expListEl = el('#expense-list-container');
+        expListEl.innerHTML = '';
+        expenseList.forEach(data => createNewExpenseEl(data));
+    }
+    toggleEmptyState(expenseList);
+}
 
 function addFilterEventListeners() {
     let filterBtn = el('#show-filterPopup');
@@ -24,10 +48,6 @@ function addFilterEventListeners() {
     clearFilterBtn.addEventListener('click', clearFilter);
     let filterOptions = el('#filter-options');
     filterOptions.addEventListener('click', showFilterOptoins);
-}
-
-function el(str) {
-    return document.querySelector(str);
 }
 
 function getSelectedExpenseType(evt) {
@@ -43,14 +63,12 @@ function addNewExpense() {
     var expTitle = el('#expense-title');
     var expAmount = el('#expense-amount');
     var expType = el('#new-expense-type');
-    var date = new Date();
-    date = date.toISOString().substring(0, 10);
     let newExp = {
         expenseId:'',
-        date: date, 
+        date: getTodayDate(), 
         title: expTitle.value,
         type: expType.value,
-        amount:expAmount.value
+        amount:parseInt(expAmount.value)
     }
     if(validateExpense(newExp)) {
         newExp.expenseId = getExpId();
@@ -59,35 +77,18 @@ function addNewExpense() {
         var budget = dataService.BUDGET();
         budget.amount -= expAmount.value;
         dataService.updateBudget(budget);
-        leftPanelBudget.updateBudgetDisplay();
+        updateBudgetDisplay();
     }
-
-}
-
-function createNewExpenseEl(exp) {
-    var expList = el('#expense-list-container');
-    var li = document.createElement('li');
-    li.className = 'expense-list-element';
-    var expHtml = `<div class='expense-details'>
-                <div style='min-width: 20%;'><label>${exp.date}</label></div>
-                <div class='expense-container'>
-                    <p class='expense-title'>${exp.title}</p>
-                    <p class='expense-type'>${expenseType[exp.type]}</p>
-                </div></div>
-                <h3 class='expense-value'>-${exp.amount}</h3>`
-    li.innerHTML = expHtml;
-    expList.appendChild(li);
+    toggleEmptyState();
+    createDataChart();
 }
 
 function resetBudget() {
     dataService.resetBudget();
-    leftPanelBudget.updateBudgetDisplay();
+    updateBudgetDisplay();
     var expList = el('#expense-list-container');
-    expList.innerHTML = ''; 
-}
-
-function getExpId() {
-    return Math.ceil(Math.random*200);
+    expList.innerHTML = '';
+    toggleEmptyState([]);
 }
 
 function validateExpense(exp) {
@@ -120,14 +121,14 @@ function toggleDropdownShow() {
 
 function showFilterPopup() {
     let popup = el('#filterpopUpContainer');
-    popup.style.display = 'block';
-
+    popup.childNodes[1].className = 'show';
+    popup.className = 'show';
 }
 
 function hideFilterPopup() {
     let popup = el('#filterpopUpContainer');
-    popup.style.display = 'none';
-    //clearFilter();
+    popup.childNodes[1].className = 'hide';
+    popup.className = 'hide';
 }
 
 function showFilterOptoins(evt) {
@@ -176,4 +177,8 @@ function clearFilter() {
     var filterType = document.querySelector('input[name="filter-type"]:checked');
     var selectedTypes = document.querySelectorAll('input[data-type]:checked');
     el('#filter-amount').value = '';
+    el('.filter-expense-type').style.display = 'none';
+    el('.filter-expense-amount').style.display = 'none';
+    filterType.checked = false;
+    selectedTypes.forEach(el => el.checked= false);
 }
