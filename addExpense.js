@@ -1,7 +1,7 @@
 import { dataService } from './dataService.js';
 import { createDataChart, updateBudgetDisplay, createNewExpenseEl, el, getTodayDate, getExpId } from './utils.js';
 
-(function() {
+(function() { //Some comment by Shruti
     var btn2 = el('#add-expense');
     btn2.addEventListener('click', addNewExpense);
     var expType = el('#new-expense-type-dropdown');
